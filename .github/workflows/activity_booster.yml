@@ -2,7 +2,7 @@ name: Sayan's Daily Activity Booster
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/7 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,16 +19,16 @@ jobs:
 
       - name: Update Activity Log
         run: |
-          echo "Activity Log - Sayan" > last_activity.txt
-          echo "Last Update: $(date)" >> last_activity.txt
-          echo "Session ID: $RANDOM" >> last_activity.txt
+          export TZ="Asia/Kolkata"
+          echo "✨ Profile Active | IST: $(date +'%Y-%m-%d %H:%M:%S') | Session: $RANDOM" >> last_activity.txt
 
       - name: Commit & Push as Sayan
         run: |
+          export TZ="Asia/Kolkata"
           git config --global user.name "kajju027"
           git config --global user.email "kajju3864@gmail.com"
           
           git add last_activity.txt
-          git commit -m "Update Activity log 🟢 [$(date)]" --allow-empty
+          git commit -m "Activity Log Updated ✅ [$(date +'%d-%m-%Y %H:%M')] #$RANDOM" --allow-empty
           git push
-
+          
