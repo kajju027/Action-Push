@@ -1,0 +1,30 @@
+name: Sayan's Daily Activity Booster
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update-text:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update Simple Text File
+        run: |
+          echo "Last active check by Sayan: $(date)" > last_activity.txt
+
+      - name: Commit & Push as Sayan
+        run: |
+          git config --global user.name "kajju027"
+          git config --global user.email "kajju3864@gmail.com"
+          
+          git add last_activity.txt
+          git commit -m "Update Activity log 🟢" || exit 0
+          git push
+          
