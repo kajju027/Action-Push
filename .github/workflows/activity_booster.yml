@@ -14,10 +14,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Update Simple Text File
+      - name: Update Activity Log
         run: |
-          echo "Last active check by Sayan: $(date)" > last_activity.txt
+          echo "Activity Log - Sayan" > last_activity.txt
+          echo "Last Update: $(date)" >> last_activity.txt
+          echo "Session ID: $RANDOM" >> last_activity.txt
 
       - name: Commit & Push as Sayan
         run: |
@@ -25,6 +29,6 @@ jobs:
           git config --global user.email "kajju3864@gmail.com"
           
           git add last_activity.txt
-          git commit -m "Update Activity log 🟢" || exit 0
+          git commit -m "Update Activity log 🟢 [$(date)]" --allow-empty
           git push
-          
+
