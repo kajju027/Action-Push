@@ -20,19 +20,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Update Activity Log
+      - name: Configure Git User
         run: |
-          export TZ="Asia/Kolkata"
-          echo "✨ Profile Active | IST: $(date +'%Y-%m-%d %H:%M:%S') | Session: $RANDOM" >> last_activity.txt
-
-      - name: Commit & Push as Sayan
-        run: |
-          export TZ="Asia/Kolkata"
           git config --global user.name "kajju027"
           git config --global user.email "209622231+kajju027@users.noreply.github.com"
+
+      - name: Sync and Update Log
+        run: |
+          export TZ="Asia/Kolkata"
+          git pull origin main --rebase
+          echo "✨ Profile Active | IST: $(date +'%Y-%m-%d %H:%M:%S') | Session: $RANDOM" >> last_activity.txt
           
+          # সেভ এবং পুশ
           git add last_activity.txt
-          git pull --rebase origin main
           git commit -m "Activity Log Updated ✅ [$(date +'%d-%m-%Y %H:%M')] #$RANDOM" --allow-empty
           git push origin main
           
