@@ -2,7 +2,7 @@ name: Sayan's Daily Activity Booster
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/45 * * * *"
   workflow_dispatch:
   push:
     branches:
